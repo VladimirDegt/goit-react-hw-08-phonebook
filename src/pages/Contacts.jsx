@@ -7,7 +7,6 @@ export default function ContactsPage() {
         <title>Contacts</title>
       </Helmet>
       <p>Contacts</p>
-      {/* <LoginForm /> */}
     </div>
   );
 }
