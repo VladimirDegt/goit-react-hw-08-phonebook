@@ -5,12 +5,12 @@ import { Navigation } from '../Navigation/Navigation';
 import css from './AppBar.module.css';
 
 export const AppBar = () => {
-  const {isLoggetIn} = useAuth();
+  const {isLoggedIn} = useAuth();
 
   return (
     <header className={css.header}>
       <Navigation />
-      {isLoggetIn ? <UserMenu/> : <AuthNav/>}
+      {isLoggedIn ? <UserMenu/> : <AuthNav/>}
     </header>
   );
 };
