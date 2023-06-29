@@ -7,17 +7,23 @@ const authSlice = createSlice({
   initialState,
   extraReducers: builder =>
    builder
-   .addCase(register.pending, state => state)
+   .addCase(register.pending, (state, {payload}) =>{
+    state.isLoading = true
+   })
    .addCase(register.fulfilled, (state, {payload}) => {
     state.user = payload.user;
     state.token = payload.token;
     state.isLoggedIn = true;
   })
    .addCase(register.rejected, state => state.isLoggedIn = false)
+   .addCase(logIn.pending, (state, {payload}) => {
+    state.isLoading = true
+   })
    .addCase(logIn.fulfilled, (state, {payload}) => {
     state.user = payload.user;
     state.token = payload.token;
     state.isLoggedIn = true;
+    state.isLoading = false;
    })
    .addCase(logOut.fulfilled, state => {
     state.user = {name: null, email: null};

@@ -1,9 +1,11 @@
+import { useAuth } from 'components/hooks/useAuth';
 import { useDispatch } from 'react-redux';
 import { logIn } from 'redux/auth/operations';
 import css from './LoginForm.module.css';
 
 export const LoginForm = () => {
   const dispatch = useDispatch();
+  const {isLoading} = useAuth();
 
   const handleSubmit = e => {
     e.preventDefault();
@@ -18,6 +20,8 @@ export const LoginForm = () => {
   };
 
   return (
+    <>
+    {isLoading && <p>Loging...</p>}
     <form className={css.form} onSubmit={handleSubmit} autoComplete="off">
       <label className={css.label}>
         Email
@@ -29,5 +33,6 @@ export const LoginForm = () => {
       </label>
       <button type="submit">Log In</button>
     </form>
+    </>
   );
 };
