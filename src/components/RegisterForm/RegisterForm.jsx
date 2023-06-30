@@ -1,3 +1,4 @@
+import { Notify } from 'notiflix';
 import { useAuth } from 'components/hooks/useAuth';
 import { useDispatch } from 'react-redux';
 import { register } from 'redux/auth/operations';
@@ -16,7 +17,11 @@ export const RegisterForm = () => {
         email: form.elements.email.value,
         password: form.elements.password.value,
       })
-    );
+    )
+    .unwrap()
+    .then(() => Notify.success('Ви зареєстровані. Ласкаво просимо!'))
+    .catch(() => Notify.failure('Такий користувач вже існує!'))
+
     form.reset();
   };
 

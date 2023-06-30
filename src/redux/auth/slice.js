@@ -28,16 +28,21 @@ const authSlice = createSlice({
     state.token = null;
     state.isLoggedIn = false;
    })
-   .addCase(refreshUser.pending, state => state.isRefreshing = true)
+   .addCase(refreshUser.pending, state => {
+    state.isRefreshing = true
+   })
    .addCase(refreshUser.fulfilled, (state, {payload}) => {
-    state.user = payload.user;
+    state.user = payload;
     state.isLoggedIn = true;
-    state.isRefreshing = true;
+    state.isRefreshing = false;
+   })
+   .addCase(refreshUser.rejected, state => {
+    state.isRefreshing = false
    })
    .addMatcher(isAnyOf(register.pending, logIn.pending, logOut.pending), handlePending)
    .addMatcher(isAnyOf(register.rejected, logIn.rejected, logOut.rejected), handleRejected)
    .addMatcher(isAnyOf(register.fulfilled, logIn.fulfilled ), handleFulfilled)
-  //  .addCase(refreshUser.rejected, state => state.isRefreshing = false)
+
 });
 
 export const authReducer = authSlice.reducer;

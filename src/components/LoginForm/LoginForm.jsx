@@ -1,3 +1,4 @@
+import { Notify } from 'notiflix';
 import { useAuth } from 'components/hooks/useAuth';
 import { useDispatch } from 'react-redux';
 import { logIn } from 'redux/auth/operations';
@@ -15,7 +16,10 @@ export const LoginForm = () => {
         email: form.elements.email.value,
         password: form.elements.password.value,
       })
-    );
+    )
+    .unwrap()
+    .then(()=> Notify.success('Ласкаво просимо!'))
+    .catch(() => Notify.failure('Неіснуючий email або пароль'))
     form.reset();
   };
 
