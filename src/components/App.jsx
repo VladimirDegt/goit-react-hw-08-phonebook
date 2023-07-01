@@ -60,7 +60,13 @@ export const App = () => {
           } />
           }
         />
-        <Route path='*' element={<HomePage />} />
+        <Route path='*' element={
+            <RestrictedRoute redirectTo="/" component={
+            <Suspense>
+              <HomePage />
+            </Suspense>
+          } />
+          } />
       </Route>
     </Routes>
     )

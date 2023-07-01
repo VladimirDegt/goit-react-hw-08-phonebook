@@ -6,7 +6,7 @@ import css from './LoginForm.module.css';
 
 export const LoginForm = () => {
   const dispatch = useDispatch();
-  const {isLoading} = useAuth();
+  const { isLoading } = useAuth();
 
   const handleSubmit = e => {
     e.preventDefault();
@@ -17,26 +17,26 @@ export const LoginForm = () => {
         password: form.elements.password.value,
       })
     )
-    .unwrap()
-    .then(()=> Notify.success('Ласкаво просимо!'))
-    .catch(() => Notify.failure('Неіснуючий email або пароль'))
+      .unwrap()
+      .then(() => Notify.success('Ласкаво просимо!'))
+      .catch(() => Notify.failure('Неіснуючий email або пароль'));
     form.reset();
   };
 
   return (
     <>
-    {isLoading && <p>Loging...</p>}
-    <form className={css.form} onSubmit={handleSubmit} autoComplete="off">
-      <label className={css.label}>
-        Email
-        <input type="email" name="email" />
-      </label>
-      <label className={css.label}>
-        Password
-        <input type="password" name="password" />
-      </label>
-      <button type="submit">Log In</button>
-    </form>
+      {isLoading && <p>Loging...</p>}
+      <form className={css.form} onSubmit={handleSubmit} autoComplete="off">
+        <label className={css.label}>
+          Email
+          <input type="email" name="email" />
+        </label>
+        <label className={css.label}>
+          Password
+          <input type="password" name="password" />
+        </label>
+        <button type="submit">Log In</button>
+      </form>
     </>
   );
 };

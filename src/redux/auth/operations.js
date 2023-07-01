@@ -1,11 +1,11 @@
-import { createAsyncThunk } from "@reduxjs/toolkit";
-import axios from "axios";
-import { pathsFetch } from "utils/pathsFetch";
+import { createAsyncThunk } from '@reduxjs/toolkit';
+import axios from 'axios';
+import { pathsFetch } from 'utils/pathsFetch';
 
 axios.defaults.baseURL = 'https://connections-api.herokuapp.com/';
 
 const setAuthHeader = token => {
-  axios.defaults.headers.common.Authorization = `Bearer ${token}`
+  axios.defaults.headers.common.Authorization = `Bearer ${token}`;
 };
 
 const clearAuthHeader = () => {
@@ -18,9 +18,9 @@ export const register = createAsyncThunk(
     try {
       const result = await axios.post(pathsFetch.register, credentials);
       setAuthHeader(result.data.token);
-      return result.data
+      return result.data;
     } catch (error) {
-      return thunkAPI.rejectWithValue(error.message)
+      return thunkAPI.rejectWithValue(error.message);
     }
   }
 );
@@ -31,24 +31,21 @@ export const logIn = createAsyncThunk(
     try {
       const result = await axios.post(pathsFetch.logIn, credentials);
       setAuthHeader(result.data.token);
-      return result.data
+      return result.data;
     } catch (error) {
-      return thunkAPI.rejectWithValue(error.message)
+      return thunkAPI.rejectWithValue(error.message);
     }
   }
 );
 
-export const logOut = createAsyncThunk(
-  'auth/logout',
-  async (_, thunkAPI) => {
-    try {
-      await axios.post(pathsFetch.logOut);
-      clearAuthHeader();
-    } catch (error) {
-      return thunkAPI.rejectWithValue(error.message)
-    }
+export const logOut = createAsyncThunk('auth/logout', async (_, thunkAPI) => {
+  try {
+    await axios.post(pathsFetch.logOut);
+    clearAuthHeader();
+  } catch (error) {
+    return thunkAPI.rejectWithValue(error.message);
   }
-);
+});
 
 export const refreshUser = createAsyncThunk(
   'auth/refresh',
@@ -63,10 +60,22 @@ export const refreshUser = createAsyncThunk(
     try {
       setAuthHeader(persistedToken);
       const result = await axios.get('/users/current');
-      console.log('object :>> ', result.data);
       return result.data;
     } catch (error) {
       return thunkAPI.rejectWithValue(error.message);
     }
   }
 );
+
+// export const addContact = createAsyncThunk(
+//   'contacts/add',
+//   async (newContact, thunkAPI) => {
+//     try {
+//       const result = await axios.post(pathsFetch.add, newContact);
+//       console.log(result.data)
+//       return result.data;
+//     } catch (error) {
+//       return thunkAPI.rejectWithValue(error.message);
+//     }
+//   }
+// );

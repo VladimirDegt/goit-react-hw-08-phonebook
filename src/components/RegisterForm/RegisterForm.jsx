@@ -6,7 +6,7 @@ import css from './RegisterForm.module.css';
 
 export const RegisterForm = () => {
   const dispatch = useDispatch();
-  const {isLoading} = useAuth();
+  const { isLoading } = useAuth();
 
   const handleSubmit = e => {
     e.preventDefault();
@@ -18,9 +18,9 @@ export const RegisterForm = () => {
         password: form.elements.password.value,
       })
     )
-    .unwrap()
-    .then(() => Notify.success('Ви зареєстровані. Ласкаво просимо!'))
-    .catch(() => Notify.failure('Такий користувач вже існує!'))
+      .unwrap()
+      .then(() => Notify.success('Ви зареєстровані. Ласкаво просимо!'))
+      .catch(() => Notify.failure('Такий користувач вже існує!'));
 
     form.reset();
   };

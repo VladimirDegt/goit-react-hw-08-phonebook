@@ -1,3 +1,6 @@
+import AddContactsForm from 'components/AddContactsForm/AddContactsForm';
+import Contacts from 'components/Contacts/Contacts';
+import Filter from 'components/Filter/Filter';
 import { Helmet } from 'react-helmet';
 
 export default function ContactsPage() {
@@ -6,7 +9,9 @@ export default function ContactsPage() {
       <Helmet>
         <title>Contacts</title>
       </Helmet>
-      <p>Contacts</p>
+      <AddContactsForm />
+      <Filter />
+      <Contacts />
     </div>
   );
-}
+};

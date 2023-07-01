@@ -15,9 +15,7 @@ const styles = {
 export default function HomePage() {
   return (
     <div style={styles.container}>
-      <h1 style={styles.title}>
-        Phonebook
-      </h1>
+      <h1 style={styles.title}>Phonebook</h1>
     </div>
   );
 }
