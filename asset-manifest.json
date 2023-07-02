@@ -1,18 +1,18 @@
 {
   "files": {
     "main.css": "/goit-react-hw-08-phonebook/static/css/main.71f8d816.css",
-    "main.js": "/goit-react-hw-08-phonebook/static/js/main.03e085c2.js",
+    "main.js": "/goit-react-hw-08-phonebook/static/js/main.c84d024b.js",
     "static/js/415.8afedf6e.chunk.js": "/goit-react-hw-08-phonebook/static/js/415.8afedf6e.chunk.js",
-    "static/js/54.128cfaac.chunk.js": "/goit-react-hw-08-phonebook/static/js/54.128cfaac.chunk.js",
+    "static/js/917.67962aa3.chunk.js": "/goit-react-hw-08-phonebook/static/js/917.67962aa3.chunk.js",
     "static/js/111.b44fbc4e.chunk.js": "/goit-react-hw-08-phonebook/static/js/111.b44fbc4e.chunk.js",
     "static/js/236.b1d69be1.chunk.js": "/goit-react-hw-08-phonebook/static/js/236.b1d69be1.chunk.js",
     "static/js/68.43d126a5.chunk.js": "/goit-react-hw-08-phonebook/static/js/68.43d126a5.chunk.js",
     "static/js/23.4d4e0f07.chunk.js": "/goit-react-hw-08-phonebook/static/js/23.4d4e0f07.chunk.js",
     "index.html": "/goit-react-hw-08-phonebook/index.html",
     "main.71f8d816.css.map": "/goit-react-hw-08-phonebook/static/css/main.71f8d816.css.map",
-    "main.03e085c2.js.map": "/goit-react-hw-08-phonebook/static/js/main.03e085c2.js.map",
+    "main.c84d024b.js.map": "/goit-react-hw-08-phonebook/static/js/main.c84d024b.js.map",
     "415.8afedf6e.chunk.js.map": "/goit-react-hw-08-phonebook/static/js/415.8afedf6e.chunk.js.map",
-    "54.128cfaac.chunk.js.map": "/goit-react-hw-08-phonebook/static/js/54.128cfaac.chunk.js.map",
+    "917.67962aa3.chunk.js.map": "/goit-react-hw-08-phonebook/static/js/917.67962aa3.chunk.js.map",
     "111.b44fbc4e.chunk.js.map": "/goit-react-hw-08-phonebook/static/js/111.b44fbc4e.chunk.js.map",
     "236.b1d69be1.chunk.js.map": "/goit-react-hw-08-phonebook/static/js/236.b1d69be1.chunk.js.map",
     "68.43d126a5.chunk.js.map": "/goit-react-hw-08-phonebook/static/js/68.43d126a5.chunk.js.map",
@@ -20,6 +20,6 @@
   },
   "entrypoints": [
     "static/css/main.71f8d816.css",
-    "static/js/main.03e085c2.js"
+    "static/js/main.c84d024b.js"
   ]
 }
