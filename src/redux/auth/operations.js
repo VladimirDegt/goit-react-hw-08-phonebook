@@ -66,16 +66,3 @@ export const refreshUser = createAsyncThunk(
     }
   }
 );
-
-// export const addContact = createAsyncThunk(
-//   'contacts/add',
-//   async (newContact, thunkAPI) => {
-//     try {
-//       const result = await axios.post(pathsFetch.add, newContact);
-//       console.log(result.data)
-//       return result.data;
-//     } catch (error) {
-//       return thunkAPI.rejectWithValue(error.message);
-//     }
-//   }
-// );

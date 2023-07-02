@@ -1,36 +1,55 @@
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import {
   StyledSection,
   StyledContainerTable,
   StyledFirstRowHead,
   StyledSecondRowHead,
-  StyledThirdRowHead,
   StyledFirstRow,
   StyledSecondRow,
-  StyledThirdRow,
   StyledChangeBtn,
 } from './Contacts.styled';
 import IconDeleteBin5Fill from 'utils/delete-icon';
+import IconWrite from 'utils/change-svg';
 import { deleteContact, getContact } from 'redux/contacts/operations';
 import { selectContactsState, selectFilterState } from 'redux/contacts/selectors';
+import { ModalChange } from 'components/ModalChange/ModalChange';
 
 function Contacts() {
+  const [isOpenModal, setIsOpenModal] = useState(false);
+  const [id, setId] = useState('');
+  const [name, setName] = useState('');
+  const [number, setNumber] = useState('');
   const dispatch = useDispatch();
   const { items, isLoading  } = useSelector(selectContactsState);
   const { filter } = useSelector(selectFilterState);
-  const onDeleteContact = id => dispatch(deleteContact(id));
 
-  let visibaleContact;
-  filter === ''
-    ? (visibaleContact = items)
-    : (visibaleContact = items.filter(item =>
-        item.name.toLowerCase().includes(filter.toLowerCase())
-      ));
+  const visibaleContact = filter === ''
+  ? items
+  : items.filter(item =>
+    item.name.toLowerCase().includes(filter.toLowerCase())
+  )
 
   useEffect(() => {
     dispatch(getContact());
   }, [dispatch]);
+
+  const onDeleteContact = id => dispatch(deleteContact(id));
+
+  function handleModalOpen(){
+    setIsOpenModal(true)
+  };
+
+  function modalClose(){
+    setIsOpenModal(false)
+  };
+
+  const onChangeContact = (id, name, number) => {
+    setId(id);
+    setName(name);
+    setNumber(number);
+    handleModalOpen();
+  }
 
   return (
     <StyledSection>
@@ -40,7 +59,6 @@ function Contacts() {
           <tr>
             <StyledFirstRowHead>Name</StyledFirstRowHead>
             <StyledSecondRowHead>Phone</StyledSecondRowHead>
-            <StyledThirdRowHead>Date</StyledThirdRowHead>
           </tr>
         </thead>
         <tbody>
@@ -48,7 +66,14 @@ function Contacts() {
             <tr key={item.id}>
               <StyledFirstRow>{item.name}</StyledFirstRow>
               <StyledSecondRow>{item.number}</StyledSecondRow>
-              <StyledThirdRow>{item.createdAt}</StyledThirdRow>
+              <td>
+                <StyledChangeBtn
+                  type="button"
+                  onClick={() => onChangeContact(item.id, item.name, item.number)}
+                >
+                  <IconWrite />
+                </StyledChangeBtn>
+              </td>
               <td>
                 <StyledChangeBtn
                   type="button"
@@ -61,6 +86,12 @@ function Contacts() {
           ))}
         </tbody>
       </StyledContainerTable>
+      {isOpenModal && <ModalChange
+          modalClose={modalClose}
+          id = {id}
+          name = {name}
+          number = {number}
+        />}
     </StyledSection>
   );
 }

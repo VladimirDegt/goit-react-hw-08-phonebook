@@ -6,6 +6,7 @@ import { useAuth } from "./hooks/useAuth";
 import { Layout } from "./Layout";
 import { PrivateRoute } from "./PrivateRoute";
 import { RestrictedRoute } from "./RestrictedRoute";
+import { GlobalStyles } from "components/GlobalStyles";
 
 const HomePage = lazy(() => import ('../pages/Home'));
 const ContactsPage = lazy(() => import ('../pages/Contacts'));
@@ -23,6 +24,8 @@ export const App = () => {
   return isRefreshing ? (
     <b>Refreshing user...</b>
   ) : (
+    <>
+      <GlobalStyles/>
       <Routes>
       <Route path='/' element={<Layout />} >
         <Route index element={
@@ -69,5 +72,6 @@ export const App = () => {
           } />
       </Route>
     </Routes>
+    </>
     )
 };
