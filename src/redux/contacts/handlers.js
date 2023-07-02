@@ -32,3 +32,9 @@ export const handledeleteContactFulfilled = (state, { payload }) => {
   Notify.info('Контакт видалено!');
   state.items = state.items.filter(item => item.id !== payload.id);
 };
+
+export const handleUpdateContactFulfilled = (state, {payload}) => {
+  state.isLoading = false;
+  state.items = state.items.filter(item => item.id !== payload.id);
+  state.items.push(payload)
+};

@@ -1,7 +1,7 @@
 import { createSlice, isAnyOf  } from '@reduxjs/toolkit';
 import { contactsInitialState } from './initial';
 import { addContact, deleteContact, getContact, updateContact } from './operations';
-import { handleAddContactFulfilled, handleFulfilled, handlePending, handleRejected, handledeleteContactFulfilled } from './handlers';
+import { handleAddContactFulfilled, handleFulfilled, handlePending, handleRejected, handleUpdateContactFulfilled, handledeleteContactFulfilled } from './handlers';
 
 const STATUS = {
   pending: 'pending',
@@ -10,10 +10,6 @@ const STATUS = {
 const { pending, rejected } = STATUS;
 const funcList = [getContact, addContact, deleteContact, updateContact];
 const funcUpdate = status => funcList.map(item => item[status]);
-
-const handleUpdateContactFulfilled = (state, {payload}) => {
-  console.log('payload', payload)
-}
 
 const contactsSlice = createSlice({
   name: 'contacts',
