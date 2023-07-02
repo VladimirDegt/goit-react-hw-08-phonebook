@@ -1,7 +1,6 @@
 import { Formik } from 'formik';
-import {DebounceInput} from 'react-debounce-input';
 import { useDispatch } from 'react-redux';
-import { StyledForm } from './Filter.styled';
+import { StyledForm, StyledInput } from './Filter.styled';
 import { filterContact } from 'redux/contacts/filterReducer';
 
 function Filter() {
@@ -10,11 +9,12 @@ function Filter() {
   return (
     <Formik initialValues={{ vidibleContacts: '' }}>
       {({ values, setFieldValue }) => (
-        <StyledForm>
+        <StyledForm >
           <label htmlFor="findcontact">Find contacts by name</label>
-          <DebounceInput
+          <StyledInput
             debounceTimeout={300}
             id="findcontact"
+            placeholder='Search...'
             name="vidibleContacts"
             type="text"
             onChange={({ target }) => {

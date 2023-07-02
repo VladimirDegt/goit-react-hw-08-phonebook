@@ -1,10 +1,18 @@
 import { Notify } from 'notiflix';
 import { useDispatch } from 'react-redux';
-import { Field, Formik, ErrorMessage } from 'formik';
-import * as Yup from 'yup';
+import { Formik, Field } from 'formik';
+import {
+  Box,
+  Button,
+  Flex,
+  FormControl,
+  FormErrorMessage,
+  FormLabel,
+  Input,
+  VStack,
+} from '@chakra-ui/react';
 import { useAuth } from 'components/hooks/useAuth';
 import { logIn } from 'redux/auth/operations';
-import { StyledButton, StyledErrorContainer, StyledForm, StyledSection } from './LoginForm.styled';
 
 export const LoginForm = () => {
   const dispatch = useDispatch();
@@ -28,38 +36,56 @@ export const LoginForm = () => {
     password: '',
   };
 
-  const validationSchema = Yup.object({
-    email: Yup.string()
-      .max(25, 'Не більше 25 символів')
-      .trim()
-      .required('Потрібно заповнити поле'),
-    password: Yup.string()
-      .max(15, 'Не більше 15 символів')
-      .required('Потрібно заповнити поле'),
-  });
-
   return (
-    <StyledSection>
-      {isLoading && <p>Loging...</p>}
-      <Formik 
-      initialValues={initialValues} 
-      onSubmit={handleSubmit}
-      validationSchema={validationSchema}
-      >
-        <StyledForm autoComplete="off">
-          <label >
-            Email
-            <Field type="email" name="email" />
-            <ErrorMessage name="email" component={StyledErrorContainer} />
-          </label>
-          <label >
-            Password
-            <Field type="password" name="password" />
-            <ErrorMessage name="password" component={StyledErrorContainer} />
-          </label>
-          <StyledButton type="submit">Log In</StyledButton>
-        </StyledForm>
-      </Formik>
-    </StyledSection>
+    <>
+      {isLoading && <p>Logining...</p>}
+      <Flex bg="gray.100" align="center" justify="center" h="100vh">
+        <Box bg="white" p={8} rounded={4} w="50vh">
+          <Formik initialValues={initialValues} onSubmit={handleSubmit}>
+            {({ handleSubmit, errors, touched }) => (
+              <form onSubmit={handleSubmit}>
+                <VStack spacing={4} align="flex-start">
+                  <FormControl>
+                    <FormLabel htmlFor="email">Email Address</FormLabel>
+                    <Field
+                      as={Input}
+                      id="email"
+                      name="email"
+                      type="email"
+                      variant="filled"
+                    />
+                  </FormControl>
+                  <FormControl
+                    isInvalid={!!errors.password && touched.password}
+                  >
+                    <FormLabel htmlFor="password">Password</FormLabel>
+                    <Field
+                      as={Input}
+                      id="password"
+                      name="password"
+                      type="password"
+                      variant="filled"
+                      validate={value => {
+                        let error;
+
+                        if (value.length < 6) {
+                          error = 'Password must contain at least 6 characters';
+                        }
+
+                        return error;
+                      }}
+                    />
+                    <FormErrorMessage>{errors.password}</FormErrorMessage>
+                  </FormControl>
+                  <Button type="submit" colorScheme="blue" width="full">
+                    Login
+                  </Button>
+                </VStack>
+              </form>
+            )}
+          </Formik>
+        </Box>
+      </Flex>
+    </>
   );
 };

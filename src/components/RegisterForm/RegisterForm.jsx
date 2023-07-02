@@ -1,48 +1,114 @@
 import { Notify } from 'notiflix';
-import { useAuth } from 'components/hooks/useAuth';
 import { useDispatch } from 'react-redux';
+import { Field, Formik } from 'formik';
+import {
+  Box,
+  Button,
+  Flex,
+  FormControl,
+  FormErrorMessage,
+  FormLabel,
+  Input,
+  VStack,
+} from '@chakra-ui/react';
 import { register } from 'redux/auth/operations';
-import css from './RegisterForm.module.css';
+import { useAuth } from 'components/hooks/useAuth';
 
 export const RegisterForm = () => {
   const dispatch = useDispatch();
   const { isLoading } = useAuth();
 
-  const handleSubmit = e => {
-    e.preventDefault();
-    const form = e.currentTarget;
+  const handleSubmit = (values, { resetForm }) => {
     dispatch(
       register({
-        name: form.elements.name.value,
-        email: form.elements.email.value,
-        password: form.elements.password.value,
+        name: values.name,
+        email: values.email,
+        password: values.password,
       })
     )
       .unwrap()
       .then(() => Notify.success('Ви зареєстровані. Ласкаво просимо!'))
       .catch(() => Notify.failure('Такий користувач вже існує!'));
+    resetForm();
+  };
 
-    form.reset();
+  const initialValues = {
+    name: '',
+    email: '',
+    password: '',
   };
 
   return (
     <>
       {isLoading && <p>Registrations...</p>}
-      <form className={css.form} onSubmit={handleSubmit} autoComplete="off">
-        <label className={css.label}>
-          Username
-          <input type="text" name="name" />
-        </label>
-        <label className={css.label}>
-          Email
-          <input type="email" name="email" />
-        </label>
-        <label className={css.label}>
-          Password
-          <input type="password" name="password" />
-        </label>
-        <button type="submit">Register</button>
-      </form>
+      <Flex bg="gray.100" align="center" justify="center" h="100vh">
+        <Box bg="white" p={8} rounded={4} w="50vh">
+          <Formik initialValues={initialValues} onSubmit={handleSubmit}>
+            {({ handleSubmit, errors, touched }) => (
+              <form onSubmit={handleSubmit}>
+                <VStack spacing={4} align="flex-start">
+                  <FormControl>
+                    <FormLabel htmlFor="name">Name</FormLabel>
+                    <Field
+                      as={Input}
+                      id="name"
+                      name="name"
+                      type="name"
+                      variant="filled"
+                      validate={value => {
+                        let error;
+
+                        if (value.length < 4) {
+                          error = 'Name must contain at least 4 characters';
+                        }
+
+                        return error;
+                      }}
+                    />
+                    <FormErrorMessage>{errors.name}</FormErrorMessage>
+                  </FormControl>
+                  <FormControl>
+                    <FormLabel htmlFor="email">Email Address</FormLabel>
+                    <Field
+                      as={Input}
+                      id="email"
+                      name="email"
+                      type="email"
+                      variant="filled"
+                    />
+                    <FormErrorMessage>{errors.email}</FormErrorMessage>
+                  </FormControl>
+                  <FormControl
+                    isInvalid={!!errors.password && touched.password}
+                  >
+                    <FormLabel htmlFor="password">Password</FormLabel>
+                    <Field
+                      as={Input}
+                      id="password"
+                      name="password"
+                      type="password"
+                      variant="filled"
+                      validate={value => {
+                        let error;
+
+                        if (value.length < 6) {
+                          error = 'Password must contain at least 6 characters';
+                        }
+
+                        return error;
+                      }}
+                    />
+                    <FormErrorMessage>{errors.password}</FormErrorMessage>
+                  </FormControl>
+                  <Button type="submit" colorScheme="blue" width="full">
+                    Login
+                  </Button>
+                </VStack>
+              </form>
+            )}
+          </Formik>
+        </Box>
+      </Flex>
     </>
   );
 };

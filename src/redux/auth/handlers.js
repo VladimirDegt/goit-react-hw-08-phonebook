@@ -17,6 +17,7 @@ export const handleRejected = state => {
 export const handleLogOutFulfilled = state => {
   state.user = { name: null, email: null };
   state.token = null;
+  state.isLoading = false;
   state.isLoggedIn = false;
 };
 

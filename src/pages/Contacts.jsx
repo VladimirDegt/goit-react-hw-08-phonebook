@@ -1,17 +1,18 @@
-import AddContactsForm from 'components/AddContactsForm/AddContactsForm';
+import { Helmet } from 'react-helmet';
 import Contacts from 'components/Contacts/Contacts';
 import Filter from 'components/Filter/Filter';
-import { Helmet } from 'react-helmet';
+import { NewContactBtn } from 'components/NewContactBtn/NewContactBtn';
+import { StyledSection } from './Contacts.styled';
 
 export default function ContactsPage() {
   return (
-    <div>
+    <StyledSection>
       <Helmet>
         <title>Contacts</title>
       </Helmet>
-      <AddContactsForm />
+      <NewContactBtn/>
       <Filter />
       <Contacts />
-    </div>
+    </StyledSection>
   );
 };
