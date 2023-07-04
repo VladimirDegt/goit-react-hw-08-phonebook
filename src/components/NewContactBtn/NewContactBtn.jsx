@@ -35,6 +35,7 @@ export const NewContactBtn = () => {
       })
     );
     resetForm();
+    onClose();
   };
 
   const initialValues = {
