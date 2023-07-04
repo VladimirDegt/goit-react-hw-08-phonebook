@@ -8,10 +8,10 @@ import { PrivateRoute } from "./PrivateRoute";
 import { RestrictedRoute } from "./RestrictedRoute";
 import { GlobalStyles } from "components/GlobalStyles";
 
-const HomePage = lazy(() => import ('../pages/Home'));
-const ContactsPage = lazy(() => import ('../pages/Contacts'));
-const LoginPage = lazy(() => import ('../pages/Login'));
-const RegisterPage = lazy(() => import ('../pages/Register'));
+const HomePage = lazy(() => import ('../pages/Home/Home'));
+const ContactsPage = lazy(() => import ('../pages/Contacts/Contacts'));
+const LoginPage = lazy(() => import ('../pages/Login/Login'));
+const RegisterPage = lazy(() => import ('../pages/Register/Register'));
 
 export const App = () => {
   const dispatch = useDispatch();
@@ -29,7 +29,7 @@ export const App = () => {
       <Routes>
       <Route path='/' element={<Layout />} >
         <Route index element={
-        <Suspense>
+        <Suspense fallback={<div>Loading...</div>}>
           <HomePage />
         </Suspense>
         } />
@@ -37,7 +37,7 @@ export const App = () => {
           path="/register"
           element={
             <RestrictedRoute redirectTo="/contacts" component={
-              <Suspense>
+              <Suspense fallback={<div>Loading...</div>}>
                 <RegisterPage />
               </Suspense>
           } />
@@ -47,7 +47,7 @@ export const App = () => {
           path="/login"
           element={
             <RestrictedRoute redirectTo="/contacts" component={
-            <Suspense>
+            <Suspense fallback={<div>Loading...</div>}>
               <LoginPage />
             </Suspense>
             } />
@@ -57,7 +57,7 @@ export const App = () => {
           path="/contacts"
           element={
             <PrivateRoute redirectTo="/login" component={
-            <Suspense>
+            <Suspense fallback={<div>Loading...</div>}>
               <ContactsPage />
             </Suspense>
           } />
@@ -65,7 +65,7 @@ export const App = () => {
         />
         <Route path='*' element={
             <RestrictedRoute redirectTo="/" component={
-            <Suspense>
+            <Suspense fallback={<div>Loading...</div>}>
               <HomePage />
             </Suspense>
           } />
